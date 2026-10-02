@@ -6,3 +6,13 @@ sentence-transformers
 requests
 python-dotenv
 pypdf
+
+
+streamlit
+langchain
+langchain-groq
+langchain-community
+langgraph
+qdrant-client
+sentence-transformers
+python-dotenv
