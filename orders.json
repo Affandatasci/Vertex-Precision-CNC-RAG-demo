@@ -1,0 +1,142 @@
+[
+  {
+    "order_id": "VPE-1001",
+    "customer_name": "Aerotech Components UK",
+    "contact_email": "procurement@aerotech-uk.com",
+    "order_date": "2026-09-01",
+    "status": "In Production",
+    "estimated_delivery": "2026-10-10",
+    "items": [
+      {"part": "CNC Turned Shaft EN24 Steel", "qty": 50, "diameter_mm": 40, "length_mm": 300, "unit_price_gbp": 28.50},
+      {"part": "Precision Ball Bearing 6208", "qty": 100, "bore_mm": 40, "unit_price_gbp": 4.20}
+    ],
+    "total_gbp": 1845.00,
+    "notes": "First article inspection report required. Material certs included."
+  },
+  {
+    "order_id": "VPE-1002",
+    "customer_name": "Midlands Hydraulics Ltd",
+    "contact_email": "orders@midlandshydraulics.co.uk",
+    "order_date": "2026-09-05",
+    "status": "Quality Inspection",
+    "estimated_delivery": "2026-10-07",
+    "items": [
+      {"part": "Hydraulic Manifold Block 316 SS", "qty": 10, "unit_price_gbp": 185.00},
+      {"part": "CNC Milled Bracket 6082 Aluminium", "qty": 25, "unit_price_gbp": 42.00}
+    ],
+    "total_gbp": 2900.00,
+    "notes": "Pressure tested to 350 bar. CMM inspection report enclosed."
+  },
+  {
+    "order_id": "VPE-1003",
+    "customer_name": "Turbine Solutions Glasgow",
+    "contact_email": "tech@turbinesolutions.co.uk",
+    "order_date": "2026-09-08",
+    "status": "Dispatched",
+    "estimated_delivery": "2026-10-03",
+    "items": [
+      {"part": "Pump Rotor Inconel 718", "qty": 5, "diameter_mm": 150, "unit_price_gbp": 620.00},
+      {"part": "Thrust Bearing SKF 51208", "qty": 10, "bore_mm": 40, "unit_price_gbp": 38.00}
+    ],
+    "total_gbp": 3480.00,
+    "notes": "Express order. Tracked courier DPD. Tracking: DPD9923441."
+  },
+  {
+    "order_id": "VPE-1004",
+    "customer_name": "AutoParts Direct Birmingham",
+    "contact_email": "buying@autopartsdirect.co.uk",
+    "order_date": "2026-09-10",
+    "status": "Quote Approved",
+    "estimated_delivery": "2026-10-20",
+    "items": [
+      {"part": "Spur Gear EN36 Steel Module 3", "qty": 200, "teeth": 24, "unit_price_gbp": 18.50},
+      {"part": "Helical Gear 304 SS Module 2", "qty": 150, "teeth": 36, "unit_price_gbp": 22.00}
+    ],
+    "total_gbp": 7000.00,
+    "notes": "Repeat order. 30-day net payment terms. Drawing rev B applied."
+  },
+  {
+    "order_id": "VPE-1005",
+    "customer_name": "MedDevice Engineering Bristol",
+    "contact_email": "supply@meddeviceeng.co.uk",
+    "order_date": "2026-09-12",
+    "status": "In Production",
+    "estimated_delivery": "2026-10-15",
+    "items": [
+      {"part": "Titanium Grade 5 Pin 3mm dia", "qty": 500, "length_mm": 25, "unit_price_gbp": 3.80},
+      {"part": "PEEK Bushing 12mm bore", "qty": 200, "unit_price_gbp": 8.50}
+    ],
+    "total_gbp": 3600.00,
+    "notes": "Medical grade. Full traceability certs required. Ra 0.4 finish."
+  },
+  {
+    "order_id": "VPE-1006",
+    "customer_name": "North Sea Energy Services",
+    "contact_email": "procurement@northseaenergy.co.uk",
+    "order_date": "2026-09-14",
+    "status": "Awaiting Drawing Approval",
+    "estimated_delivery": "2026-11-01",
+    "items": [
+      {"part": "Compressor Rotor Hastelloy C276", "qty": 2, "diameter_mm": 280, "unit_price_gbp": 4200.00},
+      {"part": "Inconel 625 Flange DN100", "qty": 8, "unit_price_gbp": 380.00}
+    ],
+    "total_gbp": 11440.00,
+    "notes": "Oil & gas application. NACE MR0175 compliance required."
+  },
+  {
+    "order_id": "VPE-1007",
+    "customer_name": "Renewable Drive Systems",
+    "contact_email": "orders@rdsystems.co.uk",
+    "order_date": "2026-09-16",
+    "status": "Completed",
+    "estimated_delivery": "2026-09-30",
+    "items": [
+      {"part": "Bevel Gear EN24 Module 5", "qty": 30, "unit_price_gbp": 95.00},
+      {"part": "Worm Gear 304 SS Module 4", "qty": 30, "unit_price_gbp": 88.00}
+    ],
+    "total_gbp": 5490.00,
+    "notes": "Wind turbine gearbox components. Delivered and signed off."
+  },
+  {
+    "order_id": "VPE-1008",
+    "customer_name": "FastFix Fasteners Ltd",
+    "contact_email": "sales@fastfixfasteners.co.uk",
+    "order_date": "2026-09-18",
+    "status": "In Production",
+    "estimated_delivery": "2026-10-12",
+    "items": [
+      {"part": "Aerospace Bolt Ti-6Al-4V M8x40", "qty": 1000, "unit_price_gbp": 1.95},
+      {"part": "Inconel 718 Nut M8", "qty": 1000, "unit_price_gbp": 1.20}
+    ],
+    "total_gbp": 3150.00,
+    "notes": "AS9100D certs required per batch. 100% thread gauge inspection."
+  },
+  {
+    "order_id": "VPE-1009",
+    "customer_name": "Defence Precision Systems",
+    "contact_email": "supply@defenceprecision.co.uk",
+    "order_date": "2026-09-20",
+    "status": "Quote Sent",
+    "estimated_delivery": "TBC",
+    "items": [
+      {"part": "17-4PH Stainless Housing CNC Milled", "qty": 12, "unit_price_gbp": 340.00},
+      {"part": "Roller Bearing 32210 Tapered", "qty": 24, "bore_mm": 50, "unit_price_gbp": 52.00}
+    ],
+    "total_gbp": 5328.00,
+    "notes": "Awaiting customer PO. NDA signed. Export licence check in progress."
+  },
+  {
+    "order_id": "VPE-1010",
+    "customer_name": "Startup Robotics Cambridge",
+    "contact_email": "engineering@startuprobotics.io",
+    "order_date": "2026-09-22",
+    "status": "Prototype Review",
+    "estimated_delivery": "2026-10-08",
+    "items": [
+      {"part": "7075 Aluminium Bracket 5-axis Milled", "qty": 5, "unit_price_gbp": 210.00},
+      {"part": "Delrin Bushing 20mm bore", "qty": 20, "unit_price_gbp": 12.00}
+    ],
+    "total_gbp": 1290.00,
+    "notes": "Prototype batch. STEP file provided. FAIR report on delivery."
+  }
+]
