@@ -21,13 +21,28 @@ with open("orders.json", "r") as f:
 
 # --- Tools ---
 @tool
+
 def search_knowledge_base(query: str) -> str:
     """Search Vertex Precision Engineering product catalogue, capabilities, materials, pricing and FAQs."""
     vec = embedder.embed_query(query)
-    results = qdrant.search(collection_name=COLLECTION, query_vector=vec, limit=5)
+    
+    # Use the new query_points API
+    response = qdrant.query_points(
+        collection_name=COLLECTION, 
+        query=vec, 
+        limit=5
+    )
+    
+    # Extract the list of points from the response
+    results = response.points
+    
     if not results:
         return "No relevant information found in the knowledge base."
-    return "\n\n".join([r.payload.get("text", "") for r in results])
+        
+    return "\n\n".join([r.payload.get("text", "") for r in results if r.payload])
+
+
+    
 
 @tool
 def lookup_order(order_id: str) -> str:

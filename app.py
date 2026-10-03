@@ -1,6 +1,5 @@
 import streamlit as st
 from agent import run_agent
-from markdown import markdown as to_html
 
 st.set_page_config(
     page_title="Vertex Precision Engineering — AI Assistant",
@@ -14,63 +13,74 @@ st.markdown("""
 .stApp { background-color: #1455A4; }
 section[data-testid="stSidebar"] { display: none; }
 
-/* ── ALL text outside the chat box → white ── */
+/* ── ALL text → pure white ── */
 body, p, div, span, li, td, th, label          { color: #FFFFFF !important; }
 .stMarkdown p, .stMarkdown li                   { color: #FFFFFF !important; font-size: 1.2rem !important; line-height: 1.7; }
 h1                                              { color: #FFFFFF !important; font-size: 2.6rem !important; }
 h2, h3                                          { color: #E3F2FD !important; }
 strong, b                                       { color: #FFFFFF !important; }
 
-/* ── Subtitle ── */
+/* ── Subtitle (caption) — 1.5× bigger ── */
 .stCaption, .stCaption p { color: #E3F2FD !important; font-size: 1.5rem !important; }
 
-/* ── "Ask me about" line ── */
+/* ── "Ask me about" line — 1.5× bigger ── */
 .ask-line { font-size: 1.5rem !important; color: #FFFFFF !important; margin-bottom: 14px; }
 .ask-line strong { font-size: 1.5rem !important; color: #FFFFFF !important; }
 
-/* ── WHITE CHAT BOX ── */
-.chat-box {
-    background-color: #FFFFFF;
-    border: 2px solid #1455A4;
-    border-radius: 14px;
-    padding: 20px 24px;
-    min-height: 200px;
-    margin-bottom: 16px;
+/* ── White messages box (Q&A container) ── */
+[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] > div {
+    background-color: #FFFFFF !important;
+    border: 2px solid #90CAF9 !important;
+    border-radius: 14px !important;
+    padding: 16px 18px !important;
+    min-height: 180px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 
 /* ── Dark text INSIDE the white box ── */
-.chat-box p, .chat-box li, .chat-box ul, .chat-box ol,
-.chat-box div, .chat-box span {
+[data-testid="stVerticalBlockBorderWrapper"] p,
+[data-testid="stVerticalBlockBorderWrapper"] li,
+[data-testid="stVerticalBlockBorderWrapper"] span,
+[data-testid="stVerticalBlockBorderWrapper"] div,
+[data-testid="stVerticalBlockBorderWrapper"] strong,
+[data-testid="stVerticalBlockBorderWrapper"] b,
+[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage p,
+[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage li,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] li,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] * {
     color: #1a1a1a !important;
-    font-size: 1.1rem !important;
-    line-height: 1.7;
+    font-size: 1.15rem !important;
+    line-height: 1.65;
 }
-.chat-box strong, .chat-box b { color: #1a1a1a !important; }
 
-/* ── Message bubbles ── */
-.msg-user {
-    background-color: #DBEAFE;
-    border-radius: 10px;
-    padding: 12px 18px;
-    margin-bottom: 14px;
+/* ── Chat bubbles ── */
+[data-testid="stChatMessage"] {
+    background-color: transparent !important;
 }
-.msg-bot {
-    background-color: #F1F5F9;
-    border-radius: 10px;
-    padding: 12px 18px;
-    margin-bottom: 14px;
+[data-testid="stChatMessage"][data-message-author-role="user"] {
+    background-color: #DBEAFE !important;
+    border: 1px solid #93C5FD !important;
+    border-radius: 12px !important;
+    padding: 14px 20px !important;
+    margin-bottom: 10px !important;
 }
-.msg-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 6px;
+[data-testid="stChatMessage"][data-message-author-role="user"] p,
+[data-testid="stChatMessage"][data-message-author-role="user"] * {
+    color: #1a1a1a !important;
 }
-.msg-user .msg-label { color: #1D4ED8 !important; }
-.msg-bot  .msg-label { color: #475569 !important; }
-.chat-placeholder { color: #94A3B8 !important; text-align: center; padding: 40px 0; font-size: 1rem !important; }
+[data-testid="stChatMessage"][data-message-author-role="assistant"] {
+    background-color: #F1F5F9 !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 12px !important;
+    padding: 14px 20px !important;
+    margin-bottom: 10px !important;
+}
+[data-testid="stChatMessage"][data-message-author-role="assistant"] p,
+[data-testid="stChatMessage"][data-message-author-role="assistant"] * {
+    color: #1a1a1a !important;
+}
 
 /* ── Writing (input) box ── */
 [data-testid="stChatInput"] textarea {
@@ -203,6 +213,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # ── STEP 1: If last message is unanswered user message → get reply FIRST ──────
+#    This runs BEFORE any rendering so the answer is ready when we draw the chat
 if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
     with st.spinner("Checking knowledge base..."):
         reply = run_agent(st.session_state.messages[-1]["content"])
@@ -234,33 +245,17 @@ with main:
         unsafe_allow_html=True
     )
 
-    # ── STEP 3: Render all messages inside a WHITE HTML box ───────────────────
-    chat_html = '<div class="chat-box">'
-    if st.session_state.messages:
+    # ── STEP 3: Render all messages inside white box (ABOVE the input) ──────
+    with st.container(border=True):
         for msg in st.session_state.messages:
-            content_html = to_html(msg["content"])
-            if msg["role"] == "user":
-                chat_html += (
-                    f'<div class="msg-user">'
-                    f'<span class="msg-label">You</span>'
-                    f'{content_html}</div>'
-                )
-            else:
-                chat_html += (
-                    f'<div class="msg-bot">'
-                    f'<span class="msg-label">Assistant</span>'
-                    f'{content_html}</div>'
-                )
-    else:
-        chat_html += '<p class="chat-placeholder">Ask a question to get started...</p>'
-    chat_html += '</div>'
-    st.markdown(chat_html, unsafe_allow_html=True)
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
 
     # ── STEP 4: Input box at the BOTTOM ──────────────────────────────────────
     user_input = st.chat_input("e.g. What materials do you work with? / Track order VPE-1003")
     if user_input:
         st.session_state.messages.append({"role": "user", "content": user_input})
-        st.rerun()
+        st.rerun()   # → goes back to STEP 1, gets reply, then redraws everything
 
     st.markdown("---")
     st.caption("📍 Vertex Precision Engineering Ltd · West Midlands, UK · enquiries@vertexprecision.co.uk · +44 121 456 7890")
