@@ -27,29 +27,59 @@ strong, b                                       { color: #FFFFFF !important; }
 .ask-line { font-size: 1.5rem !important; color: #FFFFFF !important; margin-bottom: 14px; }
 .ask-line strong { font-size: 1.5rem !important; color: #FFFFFF !important; }
 
-/* ── Chat message text ── */
-.stChatMessage p,
-.stChatMessage [data-testid="stMarkdownContainer"] p,
-.stChatMessage [data-testid="stMarkdownContainer"] li {
-    color: #FFFFFF !important;
-    font-size: 1.2rem !important;
-    line-height: 1.7;
+/* ── White messages box (Q&A container) ── */
+[data-testid="stVerticalBlockBorderWrapper"],
+div[data-testid="stVerticalBlockBorderWrapper"] > div {
+    background-color: #FFFFFF !important;
+    border: 2px solid #90CAF9 !important;
+    border-radius: 14px !important;
+    padding: 16px 18px !important;
+    min-height: 180px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+
+/* ── Dark text INSIDE the white box ── */
+[data-testid="stVerticalBlockBorderWrapper"] p,
+[data-testid="stVerticalBlockBorderWrapper"] li,
+[data-testid="stVerticalBlockBorderWrapper"] span,
+[data-testid="stVerticalBlockBorderWrapper"] div,
+[data-testid="stVerticalBlockBorderWrapper"] strong,
+[data-testid="stVerticalBlockBorderWrapper"] b,
+[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage p,
+[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage li,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] p,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] li,
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] * {
+    color: #1a1a1a !important;
+    font-size: 1.15rem !important;
+    line-height: 1.65;
 }
 
 /* ── Chat bubbles ── */
+[data-testid="stChatMessage"] {
+    background-color: transparent !important;
+}
 [data-testid="stChatMessage"][data-message-author-role="user"] {
-    background-color: rgba(255,255,255,0.12) !important;
-    border: 1px solid rgba(255,255,255,0.25) !important;
+    background-color: #DBEAFE !important;
+    border: 1px solid #93C5FD !important;
     border-radius: 12px !important;
     padding: 14px 20px !important;
     margin-bottom: 10px !important;
 }
+[data-testid="stChatMessage"][data-message-author-role="user"] p,
+[data-testid="stChatMessage"][data-message-author-role="user"] * {
+    color: #1a1a1a !important;
+}
 [data-testid="stChatMessage"][data-message-author-role="assistant"] {
-    background-color: rgba(13,55,130,0.75) !important;
-    border: 1px solid rgba(144,202,249,0.35) !important;
+    background-color: #F1F5F9 !important;
+    border: 1px solid #CBD5E1 !important;
     border-radius: 12px !important;
     padding: 14px 20px !important;
     margin-bottom: 10px !important;
+}
+[data-testid="stChatMessage"][data-message-author-role="assistant"] p,
+[data-testid="stChatMessage"][data-message-author-role="assistant"] * {
+    color: #1a1a1a !important;
 }
 
 /* ── Writing (input) box ── */
@@ -215,10 +245,11 @@ with main:
         unsafe_allow_html=True
     )
 
-    # ── STEP 3: Render all messages (ABOVE the input) ─────────────────────────
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
+    # ── STEP 3: Render all messages inside white box (ABOVE the input) ──────
+    with st.container(border=True):
+        for msg in st.session_state.messages:
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
 
     # ── STEP 4: Input box at the BOTTOM ──────────────────────────────────────
     user_input = st.chat_input("e.g. What materials do you work with? / Track order VPE-1003")
@@ -227,4 +258,4 @@ with main:
         st.rerun()   # → goes back to STEP 1, gets reply, then redraws everything
 
     st.markdown("---")
-    st.caption("📍 Vertex Precision Engineering Ltd · West Midlands, UK · enquiries@vertexprecision.co.uk")
+    st.caption("📍 Vertex Precision Engineering Ltd · West Midlands, UK · enquiries@vertexprecision.co.uk · +44 121 456 7890")
