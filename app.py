@@ -9,51 +9,44 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-/* ── Background ── */
-.stApp { background-color: #1455A4; }
+/* ── Page background: light ── */
+.stApp { background-color: #EAF2FB; }
 section[data-testid="stSidebar"] { display: none; }
 
-/* ── ALL text → pure white ── */
-body, p, div, span, li, td, th, label          { color: #FFFFFF !important; }
-.stMarkdown p, .stMarkdown li                   { color: #FFFFFF !important; font-size: 1.2rem !important; line-height: 1.7; }
-h1                                              { color: #FFFFFF !important; font-size: 2.6rem !important; }
-h2, h3                                          { color: #E3F2FD !important; }
-strong, b                                       { color: #FFFFFF !important; }
+/* ── Body text: dark navy on the light page ── */
+body, p, div, span, li, td, th, label { color: #16314F; }
+.stMarkdown p, .stMarkdown li { color: #16314F; font-size: 1.1rem !important; line-height: 1.7; }
+h2, h3    { color: #0D47A1; }
+strong, b { color: #0D47A1; }
 
-/* ── Subtitle (caption) — 1.5× bigger ── */
-.stCaption, .stCaption p { color: #E3F2FD !important; font-size: 1.5rem !important; }
-
-/* ── "Ask me about" line — 1.5× bigger ── */
-.ask-line { font-size: 1.5rem !important; color: #FFFFFF !important; margin-bottom: 14px; }
-.ask-line strong { font-size: 1.5rem !important; color: #FFFFFF !important; }
-
-/* ── White messages box (Q&A container) ── */
-[data-testid="stVerticalBlockBorderWrapper"],
-div[data-testid="stVerticalBlockBorderWrapper"] > div {
-    background-color: #FFFFFF !important;
-    border: 2px solid #90CAF9 !important;
-    border-radius: 14px !important;
-    padding: 16px 18px !important;
-    min-height: 180px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+/* ── Banner ── */
+.vx-banner {
+    background: linear-gradient(90deg, #0D47A1, #1565C0, #0D47A1);
+    border-radius: 14px;
+    padding: 22px 28px 20px 28px;
+    margin-bottom: 20px;
+    border-left: 6px solid #FFB300;
 }
-
-/* ── Dark text INSIDE the white box ── */
-[data-testid="stVerticalBlockBorderWrapper"] p,
-[data-testid="stVerticalBlockBorderWrapper"] li,
-[data-testid="stVerticalBlockBorderWrapper"] span,
-[data-testid="stVerticalBlockBorderWrapper"] div,
-[data-testid="stVerticalBlockBorderWrapper"] strong,
-[data-testid="stVerticalBlockBorderWrapper"] b,
-[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage p,
-[data-testid="stVerticalBlockBorderWrapper"] .stChatMessage li,
-[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] p,
-[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] li,
-[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] * {
-    color: #1a1a1a !important;
+.vx-banner-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #FFFFFF !important;
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+}
+.vx-banner p {
     font-size: 1.15rem !important;
-    line-height: 1.65;
+    color: #E3F2FD !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
 }
+
+/* ── Subtitle (caption) ── */
+.stCaption, .stCaption p { color: #4A6D94 !important; font-size: 1.05rem !important; }
+
+/* ── "Ask me about" line ── */
+.ask-line { font-size: 1.15rem !important; color: #16314F !important; margin-bottom: 14px; }
+.ask-line strong { color: #0D47A1 !important; }
 
 /* ── Chat bubbles ── */
 [data-testid="stChatMessage"] {
@@ -68,7 +61,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 }
 [data-testid="stChatMessage"][data-message-author-role="user"] p,
 [data-testid="stChatMessage"][data-message-author-role="user"] * {
-    color: #1a1a1a !important;
+    color: #16314F !important;
 }
 [data-testid="stChatMessage"][data-message-author-role="assistant"] {
     background-color: #F1F5F9 !important;
@@ -79,48 +72,121 @@ div[data-testid="stVerticalBlockBorderWrapper"] > div {
 }
 [data-testid="stChatMessage"][data-message-author-role="assistant"] p,
 [data-testid="stChatMessage"][data-message-author-role="assistant"] * {
-    color: #1a1a1a !important;
+    color: #16314F !important;
 }
 
 /* ── Writing (input) box ── */
 [data-testid="stChatInput"] textarea {
-    font-size: 1.2rem   !important;
+    font-size: 1.1rem   !important;
     min-height: 72px    !important;
     padding: 18px 24px  !important;
-    background-color: rgba(10,40,110,0.75) !important;
-    color: #FFFFFF       !important;
-    border: 2px solid #64B5F6 !important;
+    background-color: #FFFFFF !important;
+    color: #16314F       !important;
+    border: 2px solid #90CAF9 !important;
     border-radius: 12px  !important;
     width: 100%          !important;
 }
-[data-testid="stChatInput"] textarea::placeholder { color: #90CAF9 !important; }
+[data-testid="stChatInput"] textarea::placeholder { color: #7C96B5 !important; }
 [data-testid="stChatInput"] button { background-color: #1E88E5 !important; border-radius: 8px !important; }
 
 /* ── Divider ── */
-hr { border-color: rgba(144,202,249,0.4) !important; }
+hr { border-color: rgba(13,71,161,0.18) !important; }
 
 /* ── Spinner ── */
-.stSpinner > div { color: #90CAF9 !important; }
-
-/* ── Gear column ── */
-.gear-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 26px;
-    padding-top: 64px;
-}
-.gear-label {
-    color: #90CAF9 !important;
-    font-size: 0.75rem;
-    font-family: monospace;
-    text-align: center;
-    margin-top: -16px;
-    opacity: 0.85;
-    letter-spacing: 0.06em;
-}
+.stSpinner > div { color: #1565C0 !important; }
 </style>
 """, unsafe_allow_html=True)
+
+# ── Left/right panels: problem / solution / sample questions, and how it works + price ──
+SAMPLE_QUESTIONS = [
+    "What materials do you work with?",
+    "Track order VPE-1003",
+    "Do you hold ISO 9001 or AS9100 certification?",
+]
+
+
+def _ask_sample(question):
+    st.session_state.messages.append({"role": "user", "content": question})
+
+
+PANEL_CSS = """
+<style>
+.st-key-vx_left, .st-key-vx_right {
+    background: #FFFFFF;
+    border: 1px solid #90CAF9;
+    border-top: 5px solid #FFB300;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    padding: 20px 20px 22px 20px;
+}
+.st-key-vx_left [data-testid="stMarkdownContainer"],
+.st-key-vx_right [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
+
+.st-key-vx_left p, .st-key-vx_right li, .st-key-vx_right .vx-invest {
+    font-size: 19px !important;
+    line-height: 1.5 !important;
+    color: #1a1a1a !important;
+}
+.st-key-vx_left p { margin: 0 0 14px 0 !important; }
+.st-key-vx_left b, .st-key-vx_right b { color: #0D47A1 !important; font-weight: 800 !important; }
+.st-key-vx_left p.vx-try { font-size: 20px !important; margin: 6px 0 0 0 !important; }
+.st-key-vx_right .vx-title {
+    font-size: 23px !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    color: #0D47A1 !important;
+    margin-bottom: 14px !important;
+}
+.st-key-vx_right ol { margin: 0 0 18px 0; padding-left: 1.3em; }
+.st-key-vx_right li { margin-bottom: 10px; }
+.st-key-vx_right .vx-invest {
+    background: #E3F2FD;
+    border-left: 5px solid #FFB300;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.st-key-vx_left .stElementContainer, .st-key-vx_left .stButton { width: 100% !important; }
+.st-key-vx_left .stButton > button {
+    width: 100% !important;
+    height: auto;
+    min-height: 0;
+    background: #FFFFFF !important;
+    color: #0D47A1 !important;
+    border: 1.5px solid #1E88E5 !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+}
+.st-key-vx_left .stButton > button * { justify-content: flex-start !important; text-align: left !important; }
+.st-key-vx_left .stButton > button p {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    color: #0D47A1 !important;
+}
+.st-key-vx_left .stButton > button:hover {
+    background: #0D47A1 !important;
+    color: #FFB300 !important;
+    border-color: #0D47A1 !important;
+}
+.st-key-vx_left .stButton > button:hover p,
+.st-key-vx_left .stButton > button:focus p,
+.st-key-vx_left .stButton > button:active p {
+    color: #FFB300 !important;
+}
+
+.st-key-vx_chat {
+    background: #FFFFFF !important;
+    border: 1px solid #90CAF9 !important;
+    border-top: 5px solid #FFB300 !important;
+    border-radius: 16px !important;
+    padding: 18px 20px !important;
+    min-height: 200px;
+    box-shadow: 0 2px 12px rgba(13,71,161,0.12);
+}
+</style>
+"""
 
 # ── SVG Mechanical Components ─────────────────────────────────────────────────
 
@@ -220,33 +286,47 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
     st.session_state.messages.append({"role": "assistant", "content": reply})
 
 # ── STEP 2: Page layout ───────────────────────────────────────────────────────
-left, main, right = st.columns([0.6, 6, 0.6])
+left, main, right = st.columns([1.2, 2.6, 1.2])
 
 with left:
-    st.markdown(side_col([
-        (GEAR_BIG,  "SPUR GEAR"),
-        (BEARING,   "BALL BEARING"),
-        (BOLT,      "HEX BOLT"),
-    ]), unsafe_allow_html=True)
+    with st.container(key="vx_left"):
+        st.markdown(
+            PANEL_CSS
+            + "<p><b>The Problem:</b> Machine shops get dozens of calls a week asking about materials, lead times and order status.</p>"
+            "<p><b>The Solution:</b> This AI agent answers customer questions instantly from real product data and order records, 24/7.</p>"
+            "<p><b>Result:</b> Cuts repetitive support time by 60-80%. Try it in the chat with sample data.</p>"
+            '<p class="vx-try"><b>Try asking:</b></p>',
+            unsafe_allow_html=True,
+        )
+        for i, q in enumerate(SAMPLE_QUESTIONS):
+            st.button(q, key=f"vx_sample_{i}", on_click=_ask_sample, args=(q,))
 
 with right:
-    st.markdown(side_col([
-        (ROTOR,     "PUMP ROTOR"),
-        (GEAR_SMALL,"HELICAL GEAR"),
-        (SHAFT,     "CNC SHAFT"),
-    ]), unsafe_allow_html=True)
-
+    with st.container(key="vx_right"):
+        st.markdown(
+            '<div class="vx-title">What This Would Look Like For Your Business</div>'
+            "<ol>"
+            "<li>You send me your product range, pricing, and FAQs</li>"
+            "<li>I build and train the AI on YOUR specific content (3-4 days)</li>"
+            "<li>I deploy it to your website, WhatsApp, or email</li>"
+            "<li>Your customers get instant, accurate answers 24/7</li>"
+            "</ol>"
+            '<div class="vx-invest"><b>Investment:</b> Starting at <b>$99</b> for a basic setup. Includes 30 days of free support.</div>',
+            unsafe_allow_html=True,
+        )
 with main:
-    st.title("⚙️ Vertex Precision Engineering Ltd")
-    st.caption("CNC Machining & Mechanical Components — West Midlands, UK")
-    st.markdown("---")
+    st.markdown(
+        '<div class="vx-banner"><div class="vx-banner-title">⚙️ Vertex Precision Engineering Ltd</div>'
+        '<p>CNC Machining &amp; Mechanical Components — West Midlands, UK</p></div>',
+    unsafe_allow_html=True,
+    )
     st.markdown(
         '<p class="ask-line"><strong>Ask me about:</strong> products, materials, lead times, pricing, capabilities, certifications, or track your order.</p>',
         unsafe_allow_html=True
     )
 
     # ── STEP 3: Render all messages inside white box (ABOVE the input) ──────
-    with st.container(border=True):
+    with st.container(border=True, key="vx_chat"):
         for msg in st.session_state.messages:
             with st.chat_message(msg["role"]):
                 st.markdown(msg["content"])
@@ -258,4 +338,4 @@ with main:
         st.rerun()   # → goes back to STEP 1, gets reply, then redraws everything
 
     st.markdown("---")
-    st.caption("📍 Vertex Precision Engineering Ltd · West Midlands, UK · enquiries@vertexprecision.co.uk · +44 121 456 7890")
+    st.caption("📍 Vertex Precision Engineering Ltd · West Midlands, UK ")

@@ -13,7 +13,7 @@ load_dotenv()
 # --- Clients ---
 qdrant = QdrantClient(url=os.getenv("QDRANT_URL"), api_key=os.getenv("QDRANT_API_KEY"))
 embedder = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-llm = ChatAnthropic(model="claude-haiku-4-5", temperature=0, max_tokens=700, api_key=os.getenv("ANTHROPIC_API_KEY"))
+llm = ChatAnthropic(model="claude-haiku-5-5", max_tokens=4096, thinking={"type": "disabled"}, api_key=os.getenv("ANTHROPIC_API_KEY"))
 COLLECTION = os.getenv("QDRANT_COLLECTION", "vertex-precision-rag")
 
 with open("orders.json", "r") as f:
@@ -91,4 +91,8 @@ agent = create_react_agent(llm, tools)
 def run_agent(user_message: str) -> str:
     messages = [{"role": "system", "content": SYSTEM_PROMPT}, HumanMessage(content=user_message)]
     result = agent.invoke({"messages": messages})
-    return result["messages"][-1].content
+    
+    content = result["messages"][-1].content
+    if isinstance(content, list):
+        content = "".join(b.get("text", "") for b in content if isinstance(b, dict) and b.get("type") == "text")
+    return content or "Sorry, I couldn't generate an answer. Please try rephrasing."
